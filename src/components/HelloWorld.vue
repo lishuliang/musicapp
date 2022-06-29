@@ -1,16 +1,20 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
 defineProps({
-  msg: String
-})
+  msg: String,
+});
 
-const count = ref(0)
+const count = ref(0);
 </script>
 
 <template>
   <span>{{ msg }}</span>
-  <div id="test"></div>
+  <div id="test">
+    <svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-bofang"></use>
+    </svg>
+  </div>
 </template>
 
 <style scoped>
