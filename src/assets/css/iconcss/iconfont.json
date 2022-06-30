@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "343234",
+      "name": "问号",
+      "font_class": "wenhao",
+      "unicode": "e67f",
+      "unicode_decimal": 59007
+    },
+    {
+      "icon_id": "1190952",
+      "name": "vip",
+      "font_class": "vip",
+      "unicode": "e68b",
+      "unicode_decimal": 59019
+    },
+    {
+      "icon_id": "1304897",
+      "name": "左箭头",
+      "font_class": "zuojiantou",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "1727447",
+      "name": "216更多-竖向",
+      "font_class": "gengduo-shuxiang",
+      "unicode": "e8c4",
+      "unicode_decimal": 59588
+    },
+    {
+      "icon_id": "4292613",
+      "name": "播放",
+      "font_class": "bofang2",
+      "unicode": "e754",
+      "unicode_decimal": 59220
+    },
+    {
       "icon_id": "13137453",
       "name": "FM_未选择",
       "font_class": "FM_weixuanze",

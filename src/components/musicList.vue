@@ -2,6 +2,7 @@
 import { reactive, onMounted } from "vue";
 import { Button, Swipe, SwipeItem } from "vant";
 import { getRecommendPlaylist } from "../api/index";
+import { RouterLink, useRouter } from "vue-router";
 
 let dataState = reactive({
   playlists: [],
@@ -14,6 +15,12 @@ onMounted(async () => {
 
 const changeValue = (value) => {
   return (value / 10000).toFixed(2) + "万";
+};
+
+const router = useRouter();
+
+const clickEvent = (id) => {
+  router.push({ path: "/listview", query: { id: id } });
 };
 </script>
 
@@ -34,8 +41,9 @@ const changeValue = (value) => {
           :width="100"
         >
           <van-swipe-item
-            v-for="(item, index) in dataState.playlists"
-            :key="index"
+            v-for="item in dataState.playlists"
+            :key="item.id"
+            @click="clickEvent(item.id)"
           >
             <img :src="item.picUrl" alt="item.name" />
             <div class="name">{{ item.name }}</div>
