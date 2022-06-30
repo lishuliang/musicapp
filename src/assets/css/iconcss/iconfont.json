@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "595349",
+      "name": "评论",
+      "font_class": "pinglun",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "2076191",
+      "name": "分享",
+      "font_class": "fenxiang",
+      "unicode": "e86e",
+      "unicode_decimal": 59502
+    },
+    {
+      "icon_id": "2570137",
+      "name": "选择-多选",
+      "font_class": "xuanze-duoxuan-tianchong",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "8288890",
+      "name": "下载",
+      "font_class": "xiazai",
+      "unicode": "e856",
+      "unicode_decimal": 59478
+    },
+    {
       "icon_id": "343234",
       "name": "问号",
       "font_class": "wenhao",

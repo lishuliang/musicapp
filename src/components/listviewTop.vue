@@ -1,5 +1,4 @@
 <script setup>
-import { toRefs } from "vue";
 const props = defineProps({
   playlist: {
     require: true,
@@ -9,8 +8,6 @@ const props = defineProps({
     type: Boolean,
   },
 });
-
-// const { name } = toRefs(props.playlist);
 
 const changeValue = (value) => {
   return (value / 10000).toFixed(2) + "万";
@@ -22,7 +19,7 @@ const changeValue = (value) => {
     <img class="background" :src="props.playlist.coverImgUrl" alt="背景图片" />
     <div class="listview-top-nav">
       <div class="back">
-        <svg class="icon" aria-hidden="true">
+        <svg @click="$router.back()" class="icon" aria-hidden="true">
           <use xlink:href="#icon-zuojiantou"></use>
         </svg>
         <div class="title">歌单</div>
@@ -52,6 +49,33 @@ const changeValue = (value) => {
           <span>{{ props.playlist.creator.nickname }}</span>
         </div>
         <div class="decription">{{ props.playlist.description }}</div>
+      </div>
+    </div>
+
+    <div class="iconList">
+      <div class="iconItem">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-pinglun"></use>
+        </svg>
+        <span>{{ props.playlist.commentCount }}</span>
+      </div>
+      <div class="iconItem">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-fenxiang"></use>
+        </svg>
+        <span>{{ props.playlist.shareCount }}</span>
+      </div>
+      <div class="iconItem">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-xiazai"></use>
+        </svg>
+        <span>下载</span>
+      </div>
+      <div class="iconItem">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-xuanze-duoxuan-tianchong"></use>
+        </svg>
+        <span>多选</span>
       </div>
     </div>
   </div>
@@ -97,8 +121,8 @@ const changeValue = (value) => {
   .content {
     display: flex;
     justify-content: space-between;
-    height: 5rem;
-    padding: 0.4rem 0;
+    height: 3.8rem;
+    padding-top: 0.4rem;
     .contentLeft {
       position: relative;
       width: 2.8rem;
@@ -144,6 +168,26 @@ const changeValue = (value) => {
         padding: 0.15rem 0;
       }
       .name {
+        color: #fff;
+      }
+    }
+  }
+  .iconList {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.4rem;
+    .iconItem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .icon {
+        width: 0.6rem;
+        height: 0.6rem;
+        fill: #fff;
+      }
+      span {
+      padding-top: 0.1rem;
+        font-size: 0.26rem;
         color: #fff;
       }
     }
