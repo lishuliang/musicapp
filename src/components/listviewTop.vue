@@ -1,4 +1,6 @@
 <script setup>
+import { changeValue } from "../util/index";
+
 const props = defineProps({
   playlist: {
     require: true,
@@ -8,10 +10,6 @@ const props = defineProps({
     type: Boolean,
   },
 });
-
-const changeValue = (value) => {
-  return (value / 10000).toFixed(2) + "万";
-};
 </script>
 
 <template>
@@ -186,7 +184,7 @@ const changeValue = (value) => {
         fill: #fff;
       }
       span {
-      padding-top: 0.1rem;
+        padding-top: 0.1rem;
         font-size: 0.26rem;
         color: #fff;
       }

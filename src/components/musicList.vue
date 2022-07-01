@@ -3,6 +3,7 @@ import { reactive, onMounted } from "vue";
 import { Button, Swipe, SwipeItem } from "vant";
 import { getRecommendPlaylist } from "../api/index";
 import { RouterLink, useRouter } from "vue-router";
+import { changeValue } from "../util/index";
 
 let dataState = reactive({
   playlists: [],
@@ -12,10 +13,6 @@ onMounted(async () => {
   const result = await getRecommendPlaylist();
   dataState.playlists = result.data.result;
 });
-
-const changeValue = (value) => {
-  return (value / 10000).toFixed(2) + "万";
-};
 
 const router = useRouter();
 

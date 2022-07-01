@@ -2,7 +2,8 @@
 import { reactive, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { getPlaylistDetail } from "../api/index";
-import ListviewTop from "../components/listviewTop.vue";
+import listviewTop from "../components/listviewTop.vue";
+import playLst from "../components/playList.vue";
 
 let dateState = reactive({ detail: [], flag: false });
 const router = useRoute();
@@ -15,10 +16,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <listview-top
-    :flag="dateState.flag"
-    :playlist="dateState.detail.playlist"
-  ></listview-top>
+  <!-- <div v-if="dateState.flag"> -->
+    <listview-top :flag="dateState.flag" :playlist="dateState.detail.playlist"></listview-top>
+    <play-list :flag="dateState.flag" :playlist="dateState.detail.playlist"></play-list>
+  <!-- </div> -->
 </template>
 
 <style lang="less" scoped>
