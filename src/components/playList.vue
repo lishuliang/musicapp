@@ -113,6 +113,7 @@ const props = defineProps({
       .left {
         display: flex;
         align-items: center;
+        width: 5rem;
         .index {
           font-size: 0.4rem;
           width: 0.2rem;
@@ -124,6 +125,11 @@ const props = defineProps({
           font-size: 0.3rem;
           font-weight: 900;
           margin-bottom: 0.1rem;
+          width: 4.5rem;
+          display: inline-block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .author {
@@ -131,18 +137,19 @@ const props = defineProps({
           align-items: center;
           .tag {
             font-size: 0.2rem;
-            width: 0.5rem;
             color: orangered;
             border: 1px solid orangered;
             border-radius: 0.05rem;
             margin: 0 0.05rem;
           }
-          .name{
+          .name {
             font-size: 0.1rem;
             display: inline-block;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            min-width: 0;
+            max-width: 2.8rem;
           }
         }
       }
