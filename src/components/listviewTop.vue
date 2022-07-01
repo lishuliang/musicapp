@@ -1,4 +1,5 @@
 <script setup>
+import { reactive, toRefs } from "vue";
 import { changeValue } from "../util/index";
 
 const props = defineProps({
@@ -10,11 +11,20 @@ const props = defineProps({
     type: Boolean,
   },
 });
+
+const useFeatureX  = (obj) => {
+  const newObj = reactive(obj);
+  return toRefs(newObj);
+}
+
+//解构props
+const {playlist, flag} = useFeatureX(props);
+
 </script>
 
 <template>
-  <div v-if="props.flag" class="listview-top">
-    <img class="background" :src="props.playlist.coverImgUrl" alt="背景图片" />
+  <div v-if="flag" class="listview-top">
+    <img class="background" :src="playlist.coverImgUrl" alt="背景图片" />
     <div class="listview-top-nav">
       <div class="back">
         <svg @click="$router.back()" class="icon" aria-hidden="true">
@@ -33,20 +43,20 @@ const props = defineProps({
     </div>
     <div class="content">
       <div class="contentLeft">
-        <img :src="props.playlist.coverImgUrl" alt="props.playlist.name" />
-        <div class="count">▷ {{ changeValue(props.playlist.playCount) }}</div>
+        <img :src="playlist.coverImgUrl" alt="playlist.name" />
+        <div class="count">▷ {{ changeValue(playlist.playCount) }}</div>
       </div>
       <div class="contentRight">
-        <h4 class="name">{{ props.playlist.name }}</h4>
+        <h4 class="name">{{ playlist.name }}</h4>
         <div class="author">
           <img
             class="avatar"
-            :src="props.playlist.creator.avatarUrl"
+            :src="playlist.creator.avatarUrl"
             alt="avatar"
           />
-          <span>{{ props.playlist.creator.nickname }}</span>
+          <span>{{ playlist.creator.nickname }}</span>
         </div>
-        <div class="decription">{{ props.playlist.description }}</div>
+        <div class="decription">{{ playlist.description }}</div>
       </div>
     </div>
 
@@ -55,13 +65,13 @@ const props = defineProps({
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun"></use>
         </svg>
-        <span>{{ props.playlist.commentCount }}</span>
+        <span>{{ playlist.commentCount }}</span>
       </div>
       <div class="iconItem">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-fenxiang"></use>
         </svg>
-        <span>{{ props.playlist.shareCount }}</span>
+        <span>{{ playlist.shareCount }}</span>
       </div>
       <div class="iconItem">
         <svg class="icon" aria-hidden="true">
