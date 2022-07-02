@@ -5,7 +5,7 @@ import { getRecommendPlaylist } from "../api/index";
 import { RouterLink, useRouter } from "vue-router";
 import { changeValue } from "../util/index";
 
-let dataState = reactive({
+const dataState = reactive({
   playlists: [],
 });
 

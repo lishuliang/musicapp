@@ -1,37 +1,42 @@
 <script setup>
-import { ref, onMounted, reactive } from "vue";
+import { ref, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
+import playMusic from "../components/playMusic.vue";
+import { useFeatureX } from "../util/index";
 
 const store = useStore();
 const audio = ref(null);
-const reaFlag = reactive({ flag: false });
+const data = reactive({ pause: false, show: false });
 
-onMounted(() => {});
+const { pause, show } = toRefs(data);
+const { playCurrentIndex, playlist } = useFeatureX(store.state);
 
 const play = () => {
   if (audio.value.paused) {
     audio.value.play();
-    // flag.value = true;
-    reaFlag.flag = true;
+    data.pause = true;
   } else {
     audio.value.pause();
-    reaFlag.flag = false;
+    data.pause = false;
   }
 };
+
+const changeShow = () => {
+  data.show = !data.show;
+};
+
 </script>
 
 <template>
   <div class="play-controllor">
-    <div class="left">
-      <img
-        :src="store.state.playlist[store.state.playCurrentIndex].al.picUrl"
-      />
+    <div class="left" @click="changeShow">
+      <img :src="playlist[playCurrentIndex].al.picUrl" />
       <div class="content">
-        {{ store.state.playlist[store.state.playCurrentIndex].al.name }}
+        {{ playlist[playCurrentIndex].name }}
       </div>
     </div>
     <div class="right">
-      <svg v-if="reaFlag.flag" class="icon" aria-hidden="true" @click="play">
+      <svg v-if="pause" class="icon" aria-hidden="true" @click="play">
         <use xlink:href="#icon-bofang"></use>
       </svg>
       <svg v-else class="icon" aria-hidden="true" @click="play">
@@ -41,11 +46,10 @@ const play = () => {
         <use xlink:href="#icon-bofangliebiao"></use>
       </svg>
       <audio
-        :src="`https://music.163.com/song/media/outer/url?id=${
-          store.state.playlist[store.state.playCurrentIndex].id
-        }.mp3`"
+        :src="`https://music.163.com/song/media/outer/url?id=${playlist[playCurrentIndex].id}.mp3`"
         ref="audio"
       ></audio>
+      <play-music v-show="show" @changeShow="changeShow"></play-music>
     </div>
   </div>
 </template>
@@ -69,6 +73,9 @@ const play = () => {
       height: 0.8rem;
       border-radius: 0.5rem;
       margin: 0 0.2rem;
+    }
+    .content {
+      width: 4.3rem;
     }
   }
   .right {

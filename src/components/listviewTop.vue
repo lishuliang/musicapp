@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, toRefs } from "vue";
-import { changeValue } from "../util/index";
+import { changeValue, useFeatureX } from "../util/index";
 
 const props = defineProps({
   playlist: {
@@ -12,12 +12,6 @@ const props = defineProps({
   },
 });
 
-const useFeatureX  = (obj) => {
-  const newObj = reactive(obj);
-  return toRefs(newObj);
-}
-
-//解构props
 const {playlist, flag} = useFeatureX(props);
 
 </script>

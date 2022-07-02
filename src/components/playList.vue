@@ -1,6 +1,7 @@
 <script setup>
+import { useStore } from "vuex";
 import { Button } from "vant";
-import { changeValue } from "../util/index";
+import { changeValue, useFeatureX } from "../util/index";
 
 const props = defineProps({
   playlist: {
@@ -10,10 +11,16 @@ const props = defineProps({
     type: Boolean,
   },
 });
+const { flag, playlist } = useFeatureX(props);
+const store = useStore();
+
+const changeSong = (index) => {
+  store.dispatch("setPlaycurrentindex", index);
+};
 </script>
 
 <template>
-  <div v-if="props.flag" class="playlist">
+  <div v-if="flag" class="playlist">
     <div class="playlist-top">
       <div class="left">
         <svg class="icon" aria-hidden="true">
@@ -21,12 +28,12 @@ const props = defineProps({
         </svg>
         <div class="text">
           <div class="title">播放全部</div>
-          <div class="num">(共{{ props.playlist.tracks.length }}首)</div>
+          <div class="num">(共{{ playlist.tracks.length }}首)</div>
         </div>
       </div>
       <div class="right">
         <van-button type="default" size="small" round color="#e60026"
-          >+收藏({{ changeValue(props.playlist.subscribedCount) }})</van-button
+          >+收藏({{ changeValue(playlist.subscribedCount) }})</van-button
         >
       </div>
     </div>
@@ -34,7 +41,7 @@ const props = defineProps({
     <div class="list">
       <div
         class="play-item"
-        v-for="(item, index) in props.playlist.tracks"
+        v-for="(item, index) in playlist.tracks"
         :key="index"
       >
         <div class="left">
@@ -46,7 +53,7 @@ const props = defineProps({
             <div class="author">
               <span
                 class="tag"
-                v-for="(tag, index) in props.playlist.tags"
+                v-for="(tag, index) in playlist.tags"
                 :key="index"
               >
                 {{ tag }}</span
@@ -56,7 +63,7 @@ const props = defineProps({
           </div>
         </div>
         <div class="right">
-          <svg class="icon" aria-hidden="true">
+          <svg class="icon" aria-hidden="true" @click="changeSong(index)">
             <use xlink:href="#icon-bofang2"></use>
           </svg>
           <svg class="icon" aria-hidden="true">
