@@ -14,7 +14,8 @@ onMounted(async () => {
   const res = await getPlaylistDetail(router.query.id);
   dateState.playlist = res.data.playlist;
   dateState.flag = true;
-  store.dispatch("setPlaylist", dateState.playlist.tracks);
+  store.dispatch("setPlaylist", { value: dateState.playlist.tracks });
+  store.dispatch("setPlaycurrentindex", { index: 0 });
 });
 </script>
 
@@ -23,10 +24,7 @@ onMounted(async () => {
     :flag="dateState.flag"
     :playlist="dateState.playlist"
   ></listview-top>
-  <play-list
-    :flag="dateState.flag"
-    :playlist="dateState.playlist"
-  ></play-list>
+  <play-list :flag="dateState.flag" :playlist="dateState.playlist"></play-list>
 </template>
 
 <style lang="less" scoped>

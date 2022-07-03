@@ -15,7 +15,7 @@ const { flag, playlist } = useFeatureX(props);
 const store = useStore();
 
 const changeSong = (index) => {
-  store.dispatch("setPlaycurrentindex", index);
+  store.dispatch("setPlaycurrentindex", { index: index });
 };
 </script>
 
@@ -78,7 +78,7 @@ const changeSong = (index) => {
 <style lang="less" scoped>
 .playlist {
   width: 7.5rem;
-  padding: 0.1rem 0.4rem;
+  padding: 0.1rem 0.2rem 1.2rem 0.2rem;
   margin-top: 0.2rem;
   background-color: #fff;
   border-top-left-radius: 0.3rem;

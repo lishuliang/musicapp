@@ -5,26 +5,40 @@ import playMusic from "../components/playMusic.vue";
 import { useFeatureX } from "../util/index";
 
 const store = useStore();
-const audio = ref(null);
-const data = reactive({ pause: false, show: false });
 
-const { pause, show } = toRefs(data);
-const { playCurrentIndex, playlist } = useFeatureX(store.state);
+const audio = ref(null);
+const data = reactive({ show: false, currentTimeId: null });
+
+const { show } = toRefs(data);
+const { playCurrentIndex, playlist, lyric, currentTime, isPause } = useFeatureX(
+  store.state
+);
+
+const updateTime = () => {
+  data.currentTimeId = setInterval(() => {
+    store.dispatch("setCurrenttime", { time: audio.value.currentTime });
+  }, 1000);
+};
 
 const play = () => {
   if (audio.value.paused) {
     audio.value.play();
-    data.pause = true;
+    store.dispatch("setIspause", { isPause: false });
+    updateTime();
   } else {
     audio.value.pause();
-    data.pause = false;
+    store.dispatch("setIspause", { isPause: true });
+    clearInterval(data.currentTimeId);
+    data.currentTimeId = null;
   }
 };
 
 const changeShow = () => {
+  store.dispatch("setLyric", {
+    id: store.state.playlist[store.state.playCurrentIndex].id,
+  });
   data.show = !data.show;
 };
-
 </script>
 
 <template>
@@ -36,11 +50,11 @@ const changeShow = () => {
       </div>
     </div>
     <div class="right">
-      <svg v-if="pause" class="icon" aria-hidden="true" @click="play">
-        <use xlink:href="#icon-bofang"></use>
+      <svg v-if="isPause" class="icon" aria-hidden="true" @click="play">
+        <use xlink:href="#icon-bofang1"></use>
       </svg>
       <svg v-else class="icon" aria-hidden="true" @click="play">
-        <use xlink:href="#icon-bofang1"></use>
+        <use xlink:href="#icon-bofang"></use>
       </svg>
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-bofangliebiao"></use>
@@ -49,7 +63,11 @@ const changeShow = () => {
         :src="`https://music.163.com/song/media/outer/url?id=${playlist[playCurrentIndex].id}.mp3`"
         ref="audio"
       ></audio>
-      <play-music v-show="show" @changeShow="changeShow"></play-music>
+      <play-music
+        v-show="show"
+        @changeShow="changeShow"
+        @play="play"
+      ></play-music>
     </div>
   </div>
 </template>

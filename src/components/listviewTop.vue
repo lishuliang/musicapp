@@ -3,6 +3,7 @@ import { reactive, toRefs } from "vue";
 import { changeValue, useFeatureX } from "../util/index";
 
 const props = defineProps({
+  //此处playlist为推荐专辑信息 不是专辑歌单列表
   playlist: {
     require: true,
     type: Object,
@@ -12,6 +13,7 @@ const props = defineProps({
   },
 });
 
+//解构props
 const {playlist, flag} = useFeatureX(props);
 
 </script>

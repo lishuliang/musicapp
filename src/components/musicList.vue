@@ -6,12 +6,12 @@ import { RouterLink, useRouter } from "vue-router";
 import { changeValue } from "../util/index";
 
 const dataState = reactive({
-  playlists: [],
+  musiclist: [],
 });
 
 onMounted(async () => {
   const result = await getRecommendPlaylist();
-  dataState.playlists = result.data.result;
+  dataState.musiclist = result.data.result;
 });
 
 const router = useRouter();
@@ -38,7 +38,7 @@ const clickEvent = (id) => {
           :width="100"
         >
           <van-swipe-item
-            v-for="item in dataState.playlists"
+            v-for="item in dataState.musiclist"
             :key="item.id"
             @click="clickEvent(item.id)"
           >
