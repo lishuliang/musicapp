@@ -5,6 +5,7 @@ import {
     SET_CURRENTTIME,
     SET_ISPAUSE,
     SET_CURRENTLYRICINDEX,
+    SET_HISTORY,
 } from './mutation-types';
 import { getLyric } from '../api/index';
 
@@ -27,5 +28,8 @@ export const actions = {
     },
     setCurrentlyricindex(context, payload) {
         context.commit(SET_CURRENTLYRICINDEX, payload.index);
+    },
+    setHistory(context, payload) {
+        context.commit(SET_HISTORY, payload.history);
     },
 };

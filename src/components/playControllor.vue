@@ -11,7 +11,7 @@ const data = reactive({ show: false, currentTimeId: null });
 
 const { show } = toRefs(data);
 const { playCurrentIndex, playlist, lyric, currentTime, isPause } = useFeatureX(
-  store.state
+  store.state.playControllor
 );
 
 const updateTime = () => {
@@ -35,7 +35,7 @@ const play = () => {
 
 const changeShow = () => {
   store.dispatch("setLyric", {
-    id: store.state.playlist[store.state.playCurrentIndex].id,
+    id: playlist.value[playCurrentIndex.value].id,
   });
   data.show = !data.show;
 };

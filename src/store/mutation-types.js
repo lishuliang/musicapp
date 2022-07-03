@@ -4,3 +4,5 @@ export const SET_LYRIC = 'SET_LYRIC';
 export const SET_ISPAUSE = 'SET_ISPAUSE';
 export const SET_CURRENTTIME = 'SET_CURRENTTIME';
 export const SET_CURRENTLYRICINDEX = 'SET_CURRENTLYRICINDEX';
+export const SET_HISTORY = 'SET_HISTORY';
+

@@ -21,3 +21,9 @@ export function getPlaylistDetail(id) {
 export function getLyric(id) {
     return axios.get(`${BASE_URL}/lyric?id=${id}`);
 }
+
+//搜索
+export function searchSong(keywords) {
+    return axios.get(`${BASE_URL}/cloudsearch?keywords=${keywords}`);
+}
+

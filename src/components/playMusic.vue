@@ -11,7 +11,7 @@ const {
   currentTime,
   isPause,
   currentLyricIndex,
-} = useFeatureX(store.state);
+} = useFeatureX(store.state.playControllor);
 const emit = defineEmits(["changeShow", "play"]);
 const isLyric = ref(true);
 const lyricEle = ref(null);
@@ -22,10 +22,9 @@ const back = () => emit("changeShow");
 const play = () => emit("play");
 
 const lyricList = computed(() => {
-  return store.state.lyric.split(/\n/g).map((item, index) => {
+  return lyric.value.split(/\n/g).map((item, index) => {
     const min = parseInt(item.slice(1, 3));
     const sec = parseInt(item.slice(4, 6));
-    // const ms = item.slice(7, 10);
     const text = item.slice(11);
     const time = min * 60 * 1000 + sec * 1000;
     return { time, text };
@@ -48,7 +47,7 @@ const goPlay = (num) => {
 
 //监听currentTime 实现歌词滚动
 watch(
-  () => store.state.currentTime,
+  () => currentTime.value,
   (time, oldTime) => {
     const curTime = time * 1000;
     for (let i = 1; i < lyricList.value.length; i++) {
@@ -58,7 +57,6 @@ watch(
       )
         store.dispatch("setCurrentlyricindex", { index: i - 1 });
     }
-  console.log(time)
     if (currentLyricIndex.value > 8) {
       lyricEle.value.scrollTop += 8;
     }

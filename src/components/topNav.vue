@@ -1,4 +1,7 @@
 <script setup>
+import { useRouter } from "vue-router";
+const router = useRouter();
+const goSearch = () => router.push("/search");
 </script>
 
 <template>
@@ -15,7 +18,7 @@
       <span class="navBtn">视频</span>
     </div>
     <div class="topRight">
-      <svg class="icon search" aria-hidden="true">
+      <svg class="icon search" aria-hidden="true" @click="goSearch">
         <use xlink:href="#icon-sousuo"></use>
       </svg>
     </div>
@@ -30,6 +33,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 0.2rem;
+  .topLeft,
+  .topRight {
+    display: flex;
+    align-items: center;
+  }
   .icon {
     width: 0.5rem;
     height: 0.5rem;
@@ -41,9 +49,9 @@
   .topCenter {
     width: 4.5rem;
     display: flex;
-    justify-content: space-around ;
+    justify-content: space-around;
     .active {
-        font-weight: 900;
+      font-weight: 900;
     }
   }
 }
