@@ -21,16 +21,16 @@ const search = async (value) => {
   songs.value = result.data.result.songs;
   searchText.value = "";
 };
+
 const delHistory = () => store.dispatch("setHistory", { history: [] });
 
 const changeSong = (index) => {
-  // console.log(playlist.value);
-  store.dispatch("setPlaylist", songs.value[index]);
-  // console.log(playlist.value);
-
-  // store.dispatch("setPlaycurrentindex", {
-  //   index: playlist.value.length - 1,
-  // });
+  store.dispatch("setPlaylist", {
+    value: [...playlist.value, songs.value[index]],
+  });
+  store.dispatch("setPlaycurrentindex", {
+    index: playlist.value.length - 1,
+  });
 };
 </script>
 

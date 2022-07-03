@@ -33,10 +33,16 @@ const lyricList = computed(() => {
 
 const goPlay = (num) => {
   !isPause.value && play();
-  const newIndex =
-    playCurrentIndex.value + num < 0
-      ? playlist.value.length - 1
-      : playCurrentIndex.value + num;
+  
+  let newIndex;
+  if (playCurrentIndex.value + num < 0) {
+    newIndex = playlist.value.length - 1;
+  } else if (playCurrentIndex.value + num > playlist.value.length - 1) {
+    newIndex = 0;
+  } else {
+    newIndex = playCurrentIndex.value + num;
+  }
+
   store.dispatch("setPlaycurrentindex", { index: newIndex });
   store.dispatch("setLyric", {
     id: playlist.value[playCurrentIndex.value].id,
@@ -54,11 +60,12 @@ watch(
       if (
         curTime > lyricList.value[i - 1].time &&
         curTime <= lyricList.value[i].time
-      )
+      ) {
         store.dispatch("setCurrentlyricindex", { index: i - 1 });
-    }
-    if (currentLyricIndex.value > 8) {
-      lyricEle.value.scrollTop += 8;
+        if (currentLyricIndex.value > 8) {
+          lyricEle.value.scrollTop += 8;
+        }
+      }
     }
   }
 );
