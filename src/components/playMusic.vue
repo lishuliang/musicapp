@@ -32,6 +32,20 @@ const lyricList = computed(() => {
   });
 });
 
+const goPlay = (num) => {
+  !isPause.value && play();
+  const newIndex =
+    playCurrentIndex.value + num < 0
+      ? playlist.value.length - 1
+      : playCurrentIndex.value + num;
+  store.dispatch("setPlaycurrentindex", { index: newIndex });
+  store.dispatch("setLyric", {
+    id: playlist.value[playCurrentIndex.value].id,
+  });
+  store.dispatch("setCurrenttime", { time: 0 });
+  store.dispatch("setCurrentlyricindex", { index: 0 });
+};
+
 //监听currentTime 实现歌词滚动
 watch(
   () => store.state.currentTime,
@@ -44,7 +58,7 @@ watch(
       )
         store.dispatch("setCurrentlyricindex", { index: i - 1 });
     }
-
+  console.log(time)
     if (currentLyricIndex.value > 8) {
       lyricEle.value.scrollTop += 8;
     }
@@ -93,7 +107,7 @@ watch(
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-xunhuan"></use>
       </svg>
-      <svg class="icon" aria-hidden="true">
+      <svg class="icon" aria-hidden="true" @click="goPlay(-1)">
         <use xlink:href="#icon-shangyishoushangyige"></use>
       </svg>
       <svg v-if="isPause" class="icon play" aria-hidden="true" @click="play">
@@ -102,7 +116,7 @@ watch(
       <svg v-else class="icon play" aria-hidden="true" @click="play">
         <use xlink:href="#icon-bofang"></use>
       </svg>
-      <svg class="icon" aria-hidden="true">
+      <svg class="icon" aria-hidden="true" @click="goPlay(1)">
         <use xlink:href="#icon-xiayigexiayishou"></use>
       </svg>
       <svg class="icon" aria-hidden="true">
