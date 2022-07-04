@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "http://localhost:4000"; //http://music.cpengx.cn
 
 //获取轮播图信息
 export function getBanners(type = 1) {

@@ -2,6 +2,7 @@
 import { useRouter } from "vue-router";
 const router = useRouter();
 const goSearch = () => router.push("/search");
+const goMe = () => router.push("/me");
 </script>
 
 <template>
@@ -12,7 +13,7 @@ const goSearch = () => router.push("/search");
       </svg>
     </div>
     <div class="topCenter">
-      <span class="navBtn">我的</span>
+      <span class="navBtn" @click="goMe">我的</span>
       <span class="navBtn">发现</span>
       <span class="navBtn">云村</span>
       <span class="navBtn">视频</span>

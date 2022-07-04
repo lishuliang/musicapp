@@ -23,6 +23,10 @@ const state = {
         currentLyricIndex: 0,
     },
     history: ['陈奕迅', '周杰伦', '伍佰'],
+    user: {
+        isLongin: false,
+        name: 'lsl',
+    },
 };
 
 const store = createStore({

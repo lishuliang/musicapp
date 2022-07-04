@@ -24,13 +24,32 @@ const search = async (value) => {
 
 const delHistory = () => store.dispatch("setHistory", { history: [] });
 
-const changeSong = (index) => {
-  store.dispatch("setPlaylist", {
-    value: [...playlist.value, songs.value[index]],
-  });
-  store.dispatch("setPlaycurrentindex", {
-    index: playlist.value.length - 1,
-  });
+const exist = (id) => {
+  const result = { isExist: false, index: 0 };
+  for (let i = 0; i < playlist.value.length - 1; i++) {
+    if (playlist.value[i].id === id) {
+      result.isExist = true;
+      result.index = i;
+    }
+  }
+  return result;
+};
+
+const changeSong = (val) => {
+  const { isExist, index } = exist(songs.value[val].id);
+
+  if (isExist) {
+    store.dispatch("setPlaycurrentindex", {
+      index: index,
+    });
+  } else {
+    store.dispatch("setPlaylist", {
+      value: [...playlist.value, songs.value[val]],
+    });
+    store.dispatch("setPlaycurrentindex", {
+      index: playlist.value.length - 1,
+    });
+  }
 };
 </script>
 
